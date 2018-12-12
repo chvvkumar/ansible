@@ -1,0 +1,10 @@
+[ubuntu]
+adminvm.lan
+kube1.lan
+kube2.lan
+
+[rpi]
+pi.hole ansible_user=pi
+
+[ubuntu:vars]
+ansible_python_interpreter=/usr/bin/python3
