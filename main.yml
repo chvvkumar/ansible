@@ -6,7 +6,9 @@
       - {role: Install_common_packages}
       - {role: upgrade_apt_latest}
       - {role: autoremove_unused_packages}
-  
+    tags:
+      - all
+
   - hosts: k8s
     become: yes
     roles:
