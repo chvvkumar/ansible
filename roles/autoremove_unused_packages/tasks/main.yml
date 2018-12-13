@@ -1,0 +1,5 @@
+---
+  - name: Autoremove unused packages
+    apt: autoremove=yes
+    register: apt_result
+    changed_when: "'packages will be REMOVED' in apt_result.stdout"

@@ -1,10 +1,26 @@
-[ubuntu]
-adminvm.lan
-kube1.lan
-kube2.lan
+[all:children]
+rpi
+ubuntu
 
-[rpi]
-pi.hole ansible_user=pi
+[rpi:children]
+pihole
+
+[ubuntu:children]
+ubuntu_general
+k8s
 
 [ubuntu:vars]
-ansible_python_interpreter=/usr/bin/python3
+ansible_python_interpreter=/usr/bin/python
+
+[pihole]
+pi.hole
+
+[pihole:vars]
+ansible_user=pi
+
+[ubuntu_general]
+adminvm.lan
+
+[k8s]
+kube1.lan
+kube2.lan
