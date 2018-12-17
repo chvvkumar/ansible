@@ -11,6 +11,7 @@ adminvm
 k8s
 monitoring
 plex
+mediabox
 
 [ubuntu:vars]
 # ansible_python_interpreter=/usr/bin/python
@@ -42,4 +43,10 @@ monitoring.lan
 plex.lan
 
 [plex:vars]
+# ansible_python_interpreter=/usr/bin/python
+
+[mediabox]
+mediabox.lan
+
+[mediabox:vars]
 # ansible_python_interpreter=/usr/bin/python

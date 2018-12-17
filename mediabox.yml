@@ -1,0 +1,8 @@
+---
+  - hosts: mediabox
+    become: yes
+    roles:
+      - {role: ubuntu_hosts}
+      - {role: docker_hosts}
+    tags:
+      - mediabox

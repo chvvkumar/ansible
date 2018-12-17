@@ -1,3 +1,4 @@
+# Add docker dependancies
 ---
   - name: Update package list
     apt: update_cache=yes
@@ -7,7 +8,7 @@
     apt: upgrade=dist
     register: apt_result
 
-  - name: Install common packages
+  - name: Install packages
     apt:
       name: "{{ item }}"
       update_cache: yes
@@ -35,3 +36,5 @@
     apt: autoremove=yes
 #   register: apt_result
     changed_when: "'packages will be REMOVED' in apt_result.stdout"      
+
+  
