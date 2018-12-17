@@ -2,18 +2,13 @@
   - hosts: all
     become: yes
     roles:
-      - {role: update_package_list}
-      - {role: Install_common_packages}
-      - {role: upgrade_apt_latest}
-      - {role: autoremove_unused_packages}
+      - {role: ubuntu_hosts}
     tags:
       - all
 
   - hosts: k8s
     become: yes
     roles:
-        - {role: add_docker_apt_keys}
-        - {role: install_docker_ce}
+      - {role: docker_hosts}
     tags:
       - docker
-    

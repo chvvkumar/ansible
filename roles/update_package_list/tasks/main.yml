@@ -1,4 +1,0 @@
----
-  - name: Update package list
-    apt: update_cache=yes
-    register: apt_result

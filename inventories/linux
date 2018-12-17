@@ -2,15 +2,18 @@
 rpi
 ubuntu
 
+
 [rpi:children]
 pihole
 
 [ubuntu:children]
-ubuntu_general
+adminvm
 k8s
+monitoring
+plex
 
 [ubuntu:vars]
-ansible_python_interpreter=/usr/bin/python
+# ansible_python_interpreter=/usr/bin/python
 
 [pihole]
 pi.hole
@@ -18,9 +21,25 @@ pi.hole
 [pihole:vars]
 ansible_user=pi
 
-[ubuntu_general]
+[adminvm]
 adminvm.lan
+
+[adminvm:vars]
+# ansible_python_interpreter=/usr/bin/python
 
 [k8s]
 kube1.lan
 kube2.lan
+docker01.lan
+
+[monitoring]
+monitoring.lan
+
+[monitoring:vars]
+# ansible_python_interpreter=/usr/bin/python
+
+[plex]
+plex.lan
+
+[plex:vars]
+# ansible_python_interpreter=/usr/bin/python

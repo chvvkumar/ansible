@@ -1,4 +1,0 @@
----
-  - name: Upgrade APT to the latest packages
-    apt: upgrade=dist
-    register: apt_result
