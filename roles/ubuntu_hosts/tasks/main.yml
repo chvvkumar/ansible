@@ -30,6 +30,7 @@
       - zip
       - nano
       - grep
+      - open-vm-tools
 
   - name: Autoremove unused packages
     apt: autoremove=yes
