@@ -1,0 +1,166 @@
+version: '2'
+
+volumes:
+    portainer_data:
+    letsencrypt:
+    git:
+    db:
+
+services:
+
+    telegraf:
+        restart: always
+        ports: 
+        - '8125:8125'
+        volumes:
+        - /home/kumar/docker/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf
+        - /proc:/host/proc:ro
+        - /var/run/docker.sock:/var/run/docker.sock
+        container_name: telegraf
+        image: telegraf        
+
+    heimdall1:
+        image: linuxserver/heimdall
+        container_name: heimdall1
+        environment:
+        - PGID=100
+        - PUID=1024
+        - TZ=America/Chicago
+        volumes:
+        - '/home/kumar/docker/heimdall:/config'
+        ports:
+        - 1080:80
+        - 10443:443
+        mem_limit: 512m
+        restart: unless-stopped
+
+    hydra:
+        restart: always
+        volumes:
+        - '/home/kumar/docker/hydra:/config'
+        - '/downloads:/downloads'
+        environment:
+        - PGID=100
+        - PUID=1024
+        - TZ=America/Chicago
+        ports:
+        - '5075:5075'
+        container_name: hydra
+        image: linuxserver/hydra
+
+    nzbget:
+        restart: always
+        volumes:
+        - '/home/kumar/docker/nzbget:/config'
+        - '/downloads:/downloads'
+        environment:
+        - PGID=100
+        - PUID=1024
+        - TZ=America/Chicago
+        ports:
+        - '33000:6789'
+        container_name: nzbget
+        image: linuxserver/nzbget
+
+    rutorrent:
+        restart: always
+        volumes:
+        - '/home/kumar/docker/rutorrent:/config'
+        - '/downloads:/downloads'
+        environment:
+        - PGID=100
+        - PUID=1024
+        - TZ=America/Chicago
+        ports:
+        - '8080:80'
+        - '5000:5000'
+        - '51413:51413'
+        - '6881:6881/udp'
+        container_name: rutorrent
+        image: linuxserver/rutorrent
+
+    radarr:
+        restart: always
+        volumes:
+        - '/home/kumar/docker/radarr:/config'
+        - '/media/movies:/movies'
+        - '/downloads:/downloads'
+        - '/etc/localtime:/etc/localtime:ro'
+        ports:
+        - '7878:7878'
+        environment:
+        - PGID=100
+        - PUID=1024
+        - TZ=America/Chicago
+        container_name: radarr
+        image: linuxserver/radarr
+
+    sonarr:
+        restart: always
+        volumes:
+        - '/home/kumar/docker/sonarr:/config'
+        - '/media/tv:/tv'
+        - '/downloads:/downloads'
+        - '/etc/localtime:/etc/localtime:ro'
+        ports:
+        - '32800:8989'
+        environment:
+        - PGID=100
+        - PUID=1024
+        - TZ=America/Chicago
+        container_name: sonarr
+        image: linuxserver/sonarr
+
+    tautulli:
+        restart: always
+        volumes:
+        - '/home/kumar/docker/tautulli:/config'
+        ports:
+        - '8181:8181'
+        environment:
+        - PGID=100
+        - PUID=1024
+        - TZ=America/Chicago
+        container_name: tautulli
+        image: linuxserver/tautulli
+
+    watchtower:
+        container_name: watchtower
+        restart: always
+        volumes:
+        - '/var/run/docker.sock:/var/run/docker.sock'
+        image: v2tec/watchtower
+
+    portainer:
+        restart: always
+        ports:
+            - '9000:9000'
+        volumes:
+            - '/var/run/docker.sock:/var/run/docker.sock'
+            - 'portainer_data:/data'
+        image: portainer/portainer
+
+    calibre-web:
+        restart: always
+        container_name: calibre-web
+        volumes:
+            - '/media/books:/books'
+            - '/home/kumar/docker/calibre-web:/config'
+        environment:
+            - USE_CONFIG_DIR=true
+            - SET_CONTAINER_TIMEZONE=true
+            - CONTAINER_TIMEZONE=America/Chicago
+            - PGID=100
+            - PUID=1024
+        ports:
+            - '8083:8083'
+        image: technosoft2000/calibre-web
+
+    varken:
+        container_name: varken
+        volumes:
+            - '/home/kumar/docker/varken:/config'
+        environment:
+            - PGID=100
+            - PUID=1024
+        image: 'boerderij/varken:nightly'
