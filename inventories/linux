@@ -8,11 +8,9 @@ pihole
 
 [ubuntu:children]
 adminvm
-#k8s
 monitoring
 plex
 mediaserver
-base
 
 [ubuntu:vars]
 # ansible_python_interpreter=/usr/bin/python
@@ -27,33 +25,23 @@ ansible_user=pi
 adminvm.lan
 
 [adminvm:vars]
-# ansible_python_interpreter=/usr/bin/python
+ansible_python_interpreter=/usr/bin/python
 
-[k8s]
-kube1.lan
-kube2.lan
-docker01.lan
 
 [monitoring]
 monitoring.lan
 
 [monitoring:vars]
-# ansible_python_interpreter=/usr/bin/python
+ansible_python_interpreter=/usr/bin/python
 
 [plex]
 plex.lan
 
 [plex:vars]
-# ansible_python_interpreter=/usr/bin/python
+ansible_python_interpreter=/usr/bin/python
 
 [mediaserver]
 mediaserver.lan
 
 [mediaserver:vars]
-# ansible_python_interpreter=/usr/bin/python
-
-[base]
-base.lan
-
-[base:vars]
-# ansible_python_interpreter=/usr/bin/python
+ansible_python_interpreter=/usr/bin/python

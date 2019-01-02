@@ -31,6 +31,7 @@
       - nano
       - grep
       - open-vm-tools
+      - tree
 
   - name: Autoremove unused packages
     apt: autoremove=yes

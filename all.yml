@@ -1,0 +1,7 @@
+---
+  - hosts: all
+    become: yes
+    roles:
+      - {role: ubuntu_hosts}
+    tags:
+      - all

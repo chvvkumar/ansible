@@ -1,0 +1,7 @@
+---
+  - hosts: plex
+    become: yes
+    roles:
+      - {role: plex_hosts}
+    tags:
+      - plex

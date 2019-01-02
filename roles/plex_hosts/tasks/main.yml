@@ -1,0 +1,105 @@
+---
+# Add keys on host
+  - name: Add plex repo keys
+    apt_key:
+      url: "https://downloads.plex.tv/plex-keys/PlexSign.key"
+      state: present
+    become: yes
+  
+  - name: Add repo
+    apt_repository:
+       repo: deb https://downloads.plex.tv/repo/deb public main
+    become: yes
+
+  - name: Add telegraf repo keys
+    apt_key:
+      url: "https://repos.influxdata.com/influxdb.key"
+      state: present
+    become: yes
+    
+  - name: "Debian | Add Telegraf repository"
+    apt_repository:
+      repo: "deb https://repos.influxdata.com/{{ ansible_distribution|lower }} {{ ansible_distribution_release }} stable"
+      filename: "telegraf"
+      state: present
+    become: yes
+
+  - name: Update packages
+    apt: update_cache=yes
+    register: apt_result
+
+# Install packages on host
+  - name: Install packages
+    apt:
+      name: "{{ item }}"
+      state: latest
+    with_items:
+      - plexmediaserver
+      - telegraf
+  
+  - name: Restart telegraf
+    service:
+      name: telegraf
+      state: restarted
+      enabled: yes
+    notify: "Restart Telegraf"
+    become: yes
+
+  - name: Copy telegraf.conf
+    copy:
+      src: telegraf_docker.conf
+      dest: /etc/telegraf/telegraf.conf
+      owner: root
+      group: root
+      mode: 0644
+    notify: "Restart Telegraf"
+    become: yes
+
+  - name: Create local directories for NFS
+    file: 
+      path: "{{ item }}"
+      state: directory
+      mode: 0777
+      owner: kumar
+      group: kumar
+      recurse: yes
+    with_items:
+      - /media/TV
+      - /media/Movies
+      - /media/Documentaries
+      - /media/Concerts
+    become: yes
+
+  - name: mount TV
+    mount:
+      name: /media/tv
+      src: synology.lan:/volume1/Multimedia/TV
+      fstype: nfs
+      state: present
+    become: yes
+  
+  - name: mount Movies
+    mount:
+      name: /media/Movies
+      src: synology.lan:/volume1/Multimedia/Movies
+      fstype: nfs
+      state: present
+    become: yes
+  
+  - name: mount Documentaries
+    mount:
+      name: /media/Documentaries
+      src: synology.lan:/volume1/Multimedia/Documentaries
+      fstype: nfs
+      state: present
+    become: yes
+  
+  - name: mount Concerts
+    mount:
+      name: /media/Concerts
+      src: synology.lan:/volume1/Multimedia/Concerts
+      fstype: nfs
+      state: present
+    become: yes
+  
+
