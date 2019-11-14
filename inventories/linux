@@ -9,8 +9,7 @@ pihole
 [ubuntu:children]
 adminvm
 monitoring
-plex
-mediaserver
+plexvm
 
 [ubuntu:vars]
 # ansible_python_interpreter=/usr/bin/python
@@ -34,14 +33,10 @@ monitoring.lan
 [monitoring:vars]
 ansible_python_interpreter=/usr/bin/python
 
-[plex]
-plex.lan
 
-[plex:vars]
+[plexvm]
+plexvm.lan
+
+[plexvm:vars]
 ansible_python_interpreter=/usr/bin/python
 
-[mediaserver]
-mediaserver.lan
-
-[mediaserver:vars]
-ansible_python_interpreter=/usr/bin/python
