@@ -10,6 +10,7 @@ pihole
 adminvm
 monitoring
 plexvm
+ubuntu.lan
 
 [ubuntu:vars]
 # ansible_python_interpreter=/usr/bin/python
@@ -40,3 +41,8 @@ plexvm.lan
 [plexvm:vars]
 ansible_python_interpreter=/usr/bin/python
 
+[ubuntu.lan]
+plexvm.lan
+
+[ubuntu.lan:vars]
+ansible_python_interpreter=/usr/bin/python

@@ -5,3 +5,5 @@
       - {role: ubuntu_hosts}
     tags:
       - all
+
+# ansible-playbook -i inventories/linux all.yml --limit 'all:!pi.hole'
