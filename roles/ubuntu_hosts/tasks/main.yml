@@ -32,6 +32,9 @@
       - grep
       - open-vm-tools
       - tree
+      - ntp
+      - ntpstat
+      - ntpdate
 
   - name: Autoremove unused packages
     apt: autoremove=yes
