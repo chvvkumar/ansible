@@ -2,6 +2,7 @@
 adminvm.lan
 monitoring.lan
 docker1.lan
+rancher01.lan
 
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3
