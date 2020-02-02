@@ -2,9 +2,6 @@
 adminvm.lan
 monitoring.lan
 docker1.lan
-rancher01.lan
-rancher02.lan
-rancher03.lan
 octopi.lan
 
 [all:vars]
