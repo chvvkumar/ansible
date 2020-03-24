@@ -7,6 +7,9 @@
     apt: upgrade=dist
     register: apt_result
 
+  - name: install python 2
+    raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+
   - name: Install common packages
     apt:
       name: "{{ item }}"
