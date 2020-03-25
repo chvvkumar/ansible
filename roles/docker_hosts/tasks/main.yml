@@ -114,6 +114,7 @@
       - { path: '/nfs/documentaries', mount: 'synology.lan:/volume1/Multimedia/Documentaries' }
       - { path: '/nfs/documentaries4k', mount: 'synology.lan:/volume1/Multimedia/Documentaries_4K' }
       - { path: '/nfs/concerts', mount: 'synology.lan:/volume1/Multimedia/Concerts' }
+      - { path: '/nfs/music', mount: 'synology.lan:/volume1/Music/Music/Sorted' }
 
   - name: Setup default git configuraiton
     git_config:
