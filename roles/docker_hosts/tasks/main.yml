@@ -68,8 +68,15 @@
     notify: "Restart Telegraf"
     become: yes
 
+  - name: Add user to docker group
+    user:
+      name: kumar
+      groups: docker
+      append: yes
+    become: yes
+
   - name: Install python packages
     pip:
-      name: "{{ item }} "
+      name: "{{ item }}"
     with_items:
       - docker
