@@ -80,3 +80,52 @@
       name: "{{ item }}"
     with_items:
       - docker
+  
+  - name: Create local directories and mount points
+    file:
+      path: "{{ item }}" 
+      state: directory
+      mode: u=rwX,g=rX,o=rX
+      owner: kumar
+      group: docker
+      recurse: yes
+    with_items:
+      - /nfs/tv
+      - /nfs/movies
+      - /nfs/movies4k
+      - /nfs/documentaries
+      - /nfs/documentaries4k
+      - /nfs/concerts
+      - /nfs/music
+      - /nfs/demos
+      - /downloads
+      - /docker/git
+
+  - name: Mount NFS directories
+    mount:
+      path: "{{ item.path }}"
+      src: "{{ item.mount }}"
+      fstype: nfs
+      state: present
+    with_items:
+      - { path: '/nfs/tv', mount: 'synology.lan:/volume1/Multimedia/TV Shows' }
+      - { path: '/nfs/movies', mount: 'synology.lan:/volume1/Multimedia/Movies' }
+      - { path: '/nfs/movies4k', mount: 'synology.lan:/volume1/Multimedia/Movies_4K' }
+      - { path: '/nfs/documentaries', mount: 'synology.lan:/volume1/Multimedia/Documentaries' }
+      - { path: '/nfs/documentaries4k', mount: 'synology.lan:/volume1/Multimedia/Documentaries_4K' }
+      - { path: '/nfs/concerts', mount: 'synology.lan:/volume1/Multimedia/Concerts' }
+
+  - name: Setup default git configuraiton
+    git_config:
+      name="{{ item.name }}"
+      scope=global
+      value="{{ item.value }}"
+    with_items:
+      - {name: "user.name",  value: "Kumar Challa" }
+      - {name: "user.email", value: "chvvkumar@gmail.com" }
+      - {name: "ui.color",   value: "True" }
+
+  - git:
+      repo: git@github.com:chvvkumar/docker.git
+      dest: /docker/git
+    become_user: kumar
