@@ -128,4 +128,5 @@
   - git:
       repo: git@github.com:chvvkumar/docker.git
       dest: /docker/git
+      update: yes
     become_user: kumar
