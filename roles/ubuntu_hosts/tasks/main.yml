@@ -12,33 +12,34 @@
 
   - name: Install common packages
     apt:
-      name: "{{ item }}"
+      name: ['git', 'python', 'python3', 'python-pip', 'python3-pip', 'nfs-common', 
+      'net-tools', 'htop', 'apt-transport-https', 'ca-certificates', 'software-properties-common', 'curl', 'grep', 'unzip', 'zip', 'nano', 'grep', 'open-vm-tools', 'tree', 'ntp', 'ntpstat', 'ntpdate']
       update_cache: yes
       cache_valid_time: 86400
       state: latest
-    with_items:
-      - git
-      - python
-      - python3
-      - python-pip
-      - python3-pip
-      - nfs-common
-      - net-tools
-      - htop
-      - apt-transport-https
-      - ca-certificates
-      - software-properties-common
-      - curl
-      - grep
-      - unzip
-      - zip
-      - nano
-      - grep
-      - open-vm-tools
-      - tree
-      - ntp
-      - ntpstat
-      - ntpdate
+    # with_items:
+    #   - git
+    #   - python
+    #   - python3
+    #   - python-pip
+    #   - python3-pip
+    #   - nfs-common
+    #   - net-tools
+    #   - htop
+    #   - apt-transport-https
+    #   - ca-certificates
+    #   - software-properties-common
+    #   - curl
+    #   - grep
+    #   - unzip
+    #   - zip
+    #   - nano
+    #   - grep
+    #   - open-vm-tools
+    #   - tree
+    #   - ntp
+    #   - ntpstat
+    #   - ntpdate
 
   - name: Autoremove unused packages
     apt: autoremove=yes
