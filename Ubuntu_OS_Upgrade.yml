@@ -1,0 +1,9 @@
+---
+  - hosts: ubuntu
+    become: yes
+    roles:
+      - {role: ubuntu_os_update}
+    tags:
+      - all
+
+# ansible-playbook -i inventories/linux all.yml --limit 'all:!pi.hole'
