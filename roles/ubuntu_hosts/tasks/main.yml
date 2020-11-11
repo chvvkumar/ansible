@@ -10,36 +10,17 @@
   - name: install python 2
     raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
 
+  - name: install python 3
+    raw: test -e /usr/bin/python3 || (apt -y update && apt install -y python3-minimal)
+
   - name: Install common packages
     apt:
       name: ['git', 'python', 'python3', 'python-pip', 'python3-pip', 'nfs-common', 
-      'net-tools', 'htop', 'apt-transport-https', 'ca-certificates', 'software-properties-common', 'curl', 'grep', 'unzip', 'zip', 'nano', 'grep', 'open-vm-tools', 'tree', 'ntp', 'ntpstat', 'ntpdate']
+      'net-tools', 'htop', 'apt-transport-https', 'ca-certificates', 'software-properties-common', 'curl', 'grep', 'unzip', 'zip', 'nano', 'grep', 'open-vm-tools', 'tree', 'ntp', 'ntpstat', 'ntpdate', 'iotop']
       update_cache: yes
       cache_valid_time: 86400
       state: latest
-    # with_items:
-    #   - git
-    #   - python
-    #   - python3
-    #   - python-pip
-    #   - python3-pip
-    #   - nfs-common
-    #   - net-tools
-    #   - htop
-    #   - apt-transport-https
-    #   - ca-certificates
-    #   - software-properties-common
-    #   - curl
-    #   - grep
-    #   - unzip
-    #   - zip
-    #   - nano
-    #   - grep
-    #   - open-vm-tools
-    #   - tree
-    #   - ntp
-    #   - ntpstat
-    #   - ntpdate
+
 
   - name: Autoremove unused packages
     apt: autoremove=yes
