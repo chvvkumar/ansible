@@ -1,7 +1,7 @@
 ---
   - block:
     - debug:
-        msg: 'This server is running Ubuntu 12.04 LTS and will be upgraded to 14.04 LTS.'
+        msg: 'This server will be upgraded.'
 
     # Now would be a good time to take a backup if you can trigger an
     # automated backup!
@@ -25,4 +25,4 @@
     - name: Reboot the server.
       reboot:
 
-    when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '18.04'
+    when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '20.04'
