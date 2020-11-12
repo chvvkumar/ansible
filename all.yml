@@ -3,6 +3,12 @@
     become: yes
     roles:
       - {role: ubuntu_hosts}
+    tags:
+      - all
+
+  - hosts: pi.hole
+    become: yes
+    roles:
       - {role: pihol_update}
     tags:
       - all
