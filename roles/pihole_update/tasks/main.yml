@@ -1,3 +1,0 @@
----
-  - name: Updated PiHole
-    raw: pihole -up

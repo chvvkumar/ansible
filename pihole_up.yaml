@@ -1,9 +1,0 @@
----
-  - hosts: pi.hole
-    become: yes
-    roles:
-      - {role: pihol_update}
-    tags:
-      - all
-
-# ansible-playbook -i inventories/linux all.yml --limit 'all:!pi.hole'
