@@ -1,8 +1,8 @@
 ---
-  - hosts: ubuntu
+  - hosts: pi.hole
     become: yes
     roles:
-      - {role: ubuntu_hosts}
+      - {role: pihol_update}
     tags:
       - all
 
